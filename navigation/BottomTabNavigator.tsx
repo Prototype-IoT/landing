@@ -5,9 +5,10 @@ import * as React from 'react';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
-import TabOneScreen from '../screens/TabOneScreen';
-import TabTwoScreen from '../screens/TabTwoScreen';
-import { BottomTabParamList, TabOneParamList, TabTwoParamList } from '../types';
+import ShowcaseScreen from '../screens/ShowcaseScreen';
+import ContactScreen from '../screens/ContactScreen';
+import { BottomTabParamList, ShowcaseParamList, ContactParamList, ServicesParamList } from '../types';
+import ServicesScreen from '../screens/ServicesScreen';
 
 const BottomTab = createBottomTabNavigator<BottomTabParamList>();
 
@@ -16,18 +17,25 @@ export default function BottomTabNavigator() {
 
   return (
     <BottomTab.Navigator
-      initialRouteName="TabOne"
+      initialRouteName="Services"
       tabBarOptions={{ activeTintColor: Colors[colorScheme].tint }}>
       <BottomTab.Screen
-        name="TabOne"
-        component={TabOneNavigator}
+        name="Showcase"
+        component={ShowcaseNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
         }}
       />
+        <BottomTab.Screen 
+          name="Services"
+          component={ServicesNavigator}
+          options={{
+            tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
+          }}
+        />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoNavigator}
+        name="Contact"
+        component={ContactNavigator}
         options={{
           tabBarIcon: ({ color }) => <TabBarIcon name="ios-code" color={color} />,
         }}
@@ -44,30 +52,45 @@ function TabBarIcon(props: { name: string; color: string }) {
 
 // Each tab has its own navigation stack, you can read more about this pattern here:
 // https://reactnavigation.org/docs/tab-based-navigation#a-stack-navigator-for-each-tab
-const TabOneStack = createStackNavigator<TabOneParamList>();
+const ShowcaseStack = createStackNavigator<ShowcaseParamList>();
 
-function TabOneNavigator() {
+function ShowcaseNavigator() {
   return (
-    <TabOneStack.Navigator>
-      <TabOneStack.Screen
-        name="TabOneScreen"
-        component={TabOneScreen}
+    <ShowcaseStack.Navigator>
+      <ShowcaseStack.Screen
+        name="ShowcaseScreen"
+        component={ShowcaseScreen}
         options={{ headerTitle: 'Tab One Title' }}
       />
-    </TabOneStack.Navigator>
+    </ShowcaseStack.Navigator>
   );
 }
 
-const TabTwoStack = createStackNavigator<TabTwoParamList>();
+const ContactStack = createStackNavigator<ContactParamList>();
 
-function TabTwoNavigator() {
+function ContactNavigator() {
   return (
-    <TabTwoStack.Navigator>
-      <TabTwoStack.Screen
-        name="TabTwoScreen"
-        component={TabTwoScreen}
+    <ContactStack.Navigator>
+      <ContactStack.Screen
+        name="ContactScreen"
+        component={ContactScreen}
         options={{ headerTitle: 'Tab Two Title' }}
       />
-    </TabTwoStack.Navigator>
+    </ContactStack.Navigator>
   );
+}
+
+const ServicesStack = createStackNavigator<ServicesParamList>();
+
+function ServicesNavigator()
+{
+  return(
+    <ServicesStack.Navigator>
+      <ServicesStack.Screen
+        name="ServicesScreen"
+        component={ServicesScreen}
+        options={{ headerTitle: 'Tab Two Title' }}
+      />
+    </ServicesStack.Navigator>
+  )
 }
